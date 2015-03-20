@@ -1,0 +1,68 @@
+name: EpicCastle
+version: 1.3
+description: Captura el castillo y obten recompensas
+
+author: Julito
+
+main: es.jlh.epicCastle.plugin.EpicCastle
+softdepend: [Factions, Vault, WorldGuard]
+
+commands:
+    ece:
+        description: Comandos basicos del plugin        
+        usage: /<command>
+        aliases: [epiccastle]        
+        permission: ec.help
+
+permissions:
+    ec.*:
+        description: Consigue acceso a todos los comandos de EpicCastle
+        children:
+            - ec.sign: true
+            - ec.info: true
+            - ec.reports: true
+            - ec.conquer: true
+            - ec.benefit: true
+            - ec.reload: true
+            - ec.settp: true
+    ec.vip:
+        description: Consigue acceso a los comandos vip
+        children:
+            - ec.reports: true
+            - ec.conquer: true
+            - ec.benefit: true
+    ec.admin:
+        description: Consigue acceso a los comandos admin
+        children:
+            - ec.sign: true
+            - ec.settp: true
+            - ec.info: true
+            - ec.reload: true            
+    # Permiso por defecto
+    ec.help:
+        description: Comandos basicos del plugin
+        default: true    
+    # Permisos incluidos en el evento PlayerSign
+    ec.sign:
+        description: Para crear un cartel
+        default: false
+    ec.conquer:
+        description: Tarda la mitad de tiempo en conquistar
+        default: false
+    ec.benefit:
+        description: Efectos de pociones en tu castillo
+        default: false
+    # Permisos incluidos en el evento MessageCastle
+    ec.reports:
+        description: Mensaje mas especifico de alerta
+        default: false    
+    # Permisos incluidos en el evento PlayerCastle
+    ec.settp:
+        description: Establecer teleport de castillo
+        default: false
+    ec.info:
+        description: Como crear las zonas
+        default: false
+    ec.reload:
+        description: Recargar el plugin
+        default: false

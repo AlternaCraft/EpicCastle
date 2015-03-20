@@ -1,0 +1,27 @@
+Conquista el lugar para tu faccion
+
+Compatible con factions y vault (y worldguard)
+
+- Definir el tipo de cartel en una zona de WG [OK]
+
+[EpicCastle]
+TiempoConquista
+TiempoRecompensa
+[faccion]
+
+- Faccion aliada debe declarar como enemiga para robar [OK]
+- Llamada a las armas [OK]
+- Miembros offline, castillo liberado (Mensaje) [OK]
+- Aguantar en la posición para conquistar (Solo si lo ha conquistado una fac antes) [Tiempo en exp] [OK]
+- Recompensa cada cierto tiempo (dinero, diamante, oro, exp) y extra de power [OK]
+
+
+
+
+
+
+COMPATIBILIDAD CON VAULT REQUIERE ECONOMIA
+MEJORAR SISTEMA DE RECOMPENSA DE POWER
+
+
+- Extras para defender la fortaleza (Spawnear mobs[no tienen aliado], apliquen pociones, extra defensa(zona claimeada))
