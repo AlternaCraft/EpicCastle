@@ -67,6 +67,7 @@ public class EpicCastleManager {
     private final EpicCastle plugin;    
     private FileConfiguration config;
     
+    public double power;
     public Sign[] carteles;
     public Location[] teleports;
     
@@ -83,12 +84,19 @@ public class EpicCastleManager {
     public void onEnable() {
         //Cargar el config
         plugin.reloadConfig();
-        if (!new File(plugin.getDataFolder() + "/config.yml").exists()) {
+        
+        if (!new File(new StringBuilder().append(
+                plugin.getDataFolder()).append(
+                        File.separator).append(
+                                "config.yml").toString()).exists()) {
             plugin.getConfig().options().header(HEADER);        
             plugin.getConfig().options().copyDefaults(true);
         }
+        
         plugin.saveConfig();
         config = plugin.getConfig();
+        
+        power = config.getDouble("rewards.power");
         
         // Cargo los carteles
         cargaCarteles();       
@@ -297,5 +305,25 @@ public class EpicCastleManager {
                 return "";
         }
     }
-        
+    
+    /**
+     * Metodo para cambiar el <i>nombre por defecto</i> del castillo por uno mas
+     * <i>agradable</i>
+     * @param c Nombre por defecto
+     * @return Nombre adecuado
+     */
+    public String cambiaNombre(String c) {
+        switch (c) {
+            case "castleXP":
+                return Lang.CASTLE_TYPE_XP.getText();
+            case "castleGold":
+                return Lang.CASTLE_TYPE_GOLD.getText();
+            case "castleDiamond":
+                return Lang.CASTLE_TYPE_DIAMOND.getText();
+            case "castleMoney":
+                return Lang.CASTLE_TYPE_MONEY.getText();
+            default:
+                return null;
+        }
+    }
 }

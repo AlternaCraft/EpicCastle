@@ -4,11 +4,11 @@ import com.massivecraft.factions.Factions;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import es.jlh.epicCastle.command.InfoCommandExecutor;
 import es.jlh.epicCastle.utils.Lang;
-import es.jlh.epicCastle.event.FactionLeaveServer;
-import es.jlh.epicCastle.event.InventoryClick;
-import es.jlh.epicCastle.event.PlayerMessageCastle;
-import es.jlh.epicCastle.event.FactionMessageCastle;
-import es.jlh.epicCastle.event.PlayerSign;
+import es.jlh.epicCastle.handlers.FactionLeaveServer;
+import es.jlh.epicCastle.handlers.InventoryClick;
+import es.jlh.epicCastle.handlers.PlayerMessageCastle;
+import es.jlh.epicCastle.handlers.FactionMessageCastle;
+import es.jlh.epicCastle.handlers.PlayerSign;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
@@ -51,7 +51,7 @@ public class EpicCastle extends JavaPlugin {
 
         if (this.invalidBukkit) {
             log.severe("Tu version no es soportada!");
-            log.severe("Este plugin funciona con la version 1.7.8/1.7.9!");
+            log.severe("Este plugin funciona con la version 1.7.X!");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }        

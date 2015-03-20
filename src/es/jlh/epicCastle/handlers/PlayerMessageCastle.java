@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package es.jlh.epicCastle.event;
+package es.jlh.epicCastle.handlers;
 
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
@@ -96,7 +96,7 @@ public class PlayerMessageCastle implements Listener, EventExecutor {
                 
                 // Mensaje que indica que saliste de la region                
                 pl.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_LEAVE_MESSAGE.getText()
-                        .replace("%CASTLE%", cambiaNombre(visitantes.get(pl)))
+                        .replace("%CASTLE%", plugin.getManager().cambiaNombre(visitantes.get(pl)))
                         .replace("%OWNER%", by)); 
                 
                 visitantes.remove(pl);                
@@ -116,7 +116,7 @@ public class PlayerMessageCastle implements Listener, EventExecutor {
                 by = ponPlayerEfectos(by, pl);
                 
                 pl.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_WELCOME_MESSAGE.getText()
-                        .replace("%CASTLE%", "Castillo XP")
+                        .replace("%CASTLE%", Lang.CASTLE_TYPE_XP.getText())
                         .replace("%OWNER%", by));
                 
                 visitantes.put(pl, "castleXP");
@@ -127,7 +127,7 @@ public class PlayerMessageCastle implements Listener, EventExecutor {
                 by = ponPlayerEfectos(by, pl);
                 
                 pl.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_WELCOME_MESSAGE.getText()
-                        .replace("%CASTLE%", "Castillo Oro")
+                        .replace("%CASTLE%", Lang.CASTLE_TYPE_GOLD.getText())
                         .replace("%OWNER%", by));
                 
                 visitantes.put(pl, "castleGold");
@@ -138,7 +138,7 @@ public class PlayerMessageCastle implements Listener, EventExecutor {
                 by = ponPlayerEfectos(by, pl);
                 
                 pl.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_WELCOME_MESSAGE.getText()
-                        .replace("%CASTLE%", "Castillo Diamante")
+                        .replace("%CASTLE%", Lang.CASTLE_TYPE_DIAMOND.getText())
                         .replace("%OWNER%", by));
                 
                 visitantes.put(pl, "castleDiamond");
@@ -149,7 +149,7 @@ public class PlayerMessageCastle implements Listener, EventExecutor {
                 by = ponPlayerEfectos(by, pl);
                 
                 pl.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_WELCOME_MESSAGE.getText()
-                        .replace("%CASTLE%", "Castillo Dinero")
+                        .replace("%CASTLE%", Lang.CASTLE_TYPE_MONEY.getText())
                         .replace("%OWNER%", by));
                 
                 visitantes.put(pl, "castleMoney");
@@ -212,28 +212,7 @@ public class PlayerMessageCastle implements Listener, EventExecutor {
             pe.getPl().removePotionEffect(PotionEffectType.REGENERATION);
         }
         chetados.remove(pe);
-    }    
-
-    /**
-     * Metodo para cambiar el <i>nombre por defecto</i> del castillo por uno mas
-     * <i>agradable</i>
-     * @param c Nombre por defecto
-     * @return Nombre adecuado
-     */
-    public String cambiaNombre(String c) {
-        switch (c) {
-            case "castleXP":
-                return "Castillo XP";
-            case "castleGold":
-                return "Castillo Oro";
-            case "castleDiamond":
-                return "Castillo Diamante";
-            case "castleMoney":
-                return "Castillo Dinero";
-            default:
-                return null;
-        }
-    }    
+    } 
     
     @Override
     public void execute(Listener ll, Event event) throws EventException {

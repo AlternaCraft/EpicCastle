@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package es.jlh.epicCastle.event;
+package es.jlh.epicCastle.handlers;
 
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.MPlayer;
@@ -16,7 +16,7 @@ import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEXP;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.OWNER;
 import es.jlh.epicCastle.utils.Lang;
 import es.jlh.epicCastle.utils.PlayerEffect;
-import static es.jlh.epicCastle.event.PlayerMessageCastle.chetados;
+import static es.jlh.epicCastle.handlers.PlayerMessageCastle.chetados;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -45,8 +45,7 @@ public class FactionLeaveServer implements EventExecutor, Listener {
     
     @EventHandler
     public void playerDisconect(PlayerQuitEvent e) {        
-        compruebaJugador(e.getPlayer());
-        
+        compruebaJugador(e.getPlayer());        
     }
     
     @EventHandler
@@ -77,7 +76,7 @@ public class FactionLeaveServer implements EventExecutor, Listener {
             String gold = plugin.getManager().valorSign(CASTLEGOLD, OWNER);
             String diamond = plugin.getManager().valorSign(CASTLEDIAMOND, OWNER);
             String money = plugin.getManager().valorSign(CASTLEMONEY, OWNER);
-
+            
             if (xp != null && xp.compareToIgnoreCase(fac) == 0) {
                 plugin.getManager().carteles[CASTLEXP].setLine(OWNER, "");
                 plugin.getManager().carteles[CASTLEXP].update();
@@ -91,6 +90,10 @@ public class FactionLeaveServer implements EventExecutor, Listener {
                 }
                 
                 Bukkit.broadcastMessage(EpicCastle.PLUGIN + Lang.CASTLE_RELEASED.getText().replace("%CASTLE%", "Castillo XP"));
+                
+                // Elimino el extra de power que tenia la faccion
+                double cant = other.getPowerBoost() - plugin.getManager().power;                    
+                other.setPowerBoost(cant);
             }
             if (gold != null && gold.compareToIgnoreCase(fac) == 0) {
                 plugin.getManager().carteles[CASTLEGOLD].setLine(OWNER, "");
@@ -105,6 +108,10 @@ public class FactionLeaveServer implements EventExecutor, Listener {
                 }
                 
                 Bukkit.broadcastMessage(EpicCastle.PLUGIN + Lang.CASTLE_RELEASED.getText().replace("%CASTLE%", "Castillo Oro"));
+                
+                // Elimino el extra de power que tenia la faccion
+                double cant = other.getPowerBoost() - plugin.getManager().power;                    
+                other.setPowerBoost(cant);
             }
             if (diamond != null && diamond.compareToIgnoreCase(fac) == 0) {
                 plugin.getManager().carteles[CASTLEDIAMOND].setLine(OWNER, "");
@@ -119,6 +126,10 @@ public class FactionLeaveServer implements EventExecutor, Listener {
                 }
                 
                 Bukkit.broadcastMessage(EpicCastle.PLUGIN + Lang.CASTLE_RELEASED.getText().replace("%CASTLE%", "Castillo Diamante"));
+                
+                // Elimino el extra de power que tenia la faccion
+                double cant = other.getPowerBoost() - plugin.getManager().power;                    
+                other.setPowerBoost(cant);
             }
             if (money != null && money.compareToIgnoreCase(fac) == 0) {
                 plugin.getManager().carteles[CASTLEMONEY].setLine(OWNER, "");
@@ -133,6 +144,10 @@ public class FactionLeaveServer implements EventExecutor, Listener {
                 }
                 
                 Bukkit.broadcastMessage(EpicCastle.PLUGIN + Lang.CASTLE_RELEASED.getText().replace("%CASTLE%", "Castillo Dinero"));
+                
+                // Elimino el extra de power que tenia la faccion
+                double cant = other.getPowerBoost() - plugin.getManager().power;                    
+                other.setPowerBoost(cant);
             }
         }
     }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package es.jlh.epicCastle.event;
+package es.jlh.epicCastle.handlers;
 
 import es.jlh.epicCastle.plugin.EpicCastle;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEDIAMOND;
@@ -12,7 +12,6 @@ import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEGOLD;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEMONEY;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEXP;
 import es.jlh.epicCastle.utils.Lang;
-import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

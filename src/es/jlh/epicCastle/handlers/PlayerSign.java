@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package es.jlh.epicCastle.event;
+package es.jlh.epicCastle.handlers;
 
 import com.massivecraft.factions.Rel;
 import com.massivecraft.factions.entity.Faction;
@@ -214,10 +214,10 @@ public class PlayerSign implements Listener, EventExecutor {
                     plugin.getManager().cargaCarteles();
                     
                     // Recompensa extra de power                    
-                    double cant = other.getPowerBoost() + plugin.getConfig().getDouble("rewards.power");                    
+                    double cant = other.getPowerBoost() + plugin.getManager().power;                    
                     other.setPowerBoost(cant);                    
                     other.sendMessage(EpicCastle.PLUGIN + Lang.FACTION_POWER_REWARD.getText()
-                            .replace("%CANT%", String.valueOf(plugin.getConfig().getDouble("rewards.power"))));                    
+                            .replace("%CANT%", String.valueOf(plugin.getManager().power)));                    
                     
                     Bukkit.getServer().broadcastMessage(EpicCastle.PLUGIN + 
                             Lang.CASTLE_TAKEN.getText()
@@ -293,7 +293,7 @@ public class PlayerSign implements Listener, EventExecutor {
                     Faction faction = FactionColl.get().getByName(nFac);
                     faction.sendMessage(EpicCastle.PLUGIN + 
                             Lang.CASTLE_DESTROY.getText().replace("%CASTLE%", cambiaString(zona, true)));
-                    faction.setPowerBoost(faction.getPowerBoost() - 10);
+                    faction.setPowerBoost(faction.getPowerBoost() - plugin.getManager().power);
                 }                                
                 
                 plugin.getManager().borrarCartel(cambiaString(zona, false));
@@ -314,18 +314,7 @@ public class PlayerSign implements Listener, EventExecutor {
      */
     public String cambiaString(String c, boolean tipo) {
         if (tipo) {
-            switch (c) {
-                case "castlexp":
-                    return "Castillo XP";
-                case "castlegold":
-                    return "Castillo Oro";
-                case "castlediamond":
-                    return "Castillo Diamante";
-                case "castlemoney":
-                    return "Castillo Dinero";
-                default:
-                    return null;
-            }
+            return plugin.getManager().cambiaNombre(c);
         }
         else {
             switch (c) {
@@ -421,16 +410,16 @@ public class PlayerSign implements Listener, EventExecutor {
                 // Recompensa extra de power
                 double cant1, cant2;
 
-                cant1 = castle.getPowerBoost() - plugin.getConfig().getDouble("rewards.power");
-                cant2 = other.getPowerBoost() + plugin.getConfig().getDouble("rewards.power");
+                cant1 = castle.getPowerBoost() - plugin.getManager().power;
+                cant2 = other.getPowerBoost() + plugin.getManager().power;
 
                 castle.setPowerBoost(cant1);
                 other.setPowerBoost(cant2);                    
 
                 castle.sendMessage(EpicCastle.PLUGIN + Lang.FACTION_POWER_LOST.getText()
-                        .replace("%CANT%", String.valueOf(plugin.getConfig().getDouble("rewards.power"))));
+                        .replace("%CANT%", String.valueOf(plugin.getManager().power)));
                 other.sendMessage(EpicCastle.PLUGIN + Lang.FACTION_POWER_REWARD.getText()
-                        .replace("%CANT%", String.valueOf(plugin.getConfig().getDouble("rewards.power"))));
+                        .replace("%CANT%", String.valueOf(plugin.getManager().power)));
 
                 // Elimino el aviso del jugador que conquisto
                 FactionMessageCastle.getAtacantes().remove(pl);                                      

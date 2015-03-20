@@ -1,4 +1,4 @@
-package es.jlh.epicCastle.event;
+package es.jlh.epicCastle.handlers;
 
 import com.massivecraft.factions.Rel;
 import com.massivecraft.factions.entity.Faction;
@@ -96,30 +96,30 @@ public class FactionMessageCastle implements Listener, EventExecutor {
                 // Modulo VIP / user normal
                 if (vip && other == null) {
                     faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_NOFACTION_LEAVE.getText()
-                                .replace("%CASTLE%", cambiaNombre(atacantes.get(pl)))
+                                .replace("%CASTLE%", plugin.getManager().cambiaNombre(atacantes.get(pl)))
                                 .replace("%PLAYER%", pl.getDisplayName()));
                 }
                 else if (vip) {                
                     if (other.getRelationWish(faction) == Rel.ALLY) {
                         faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_ALLY_LEAVE.getText()
-                                .replace("%CASTLE%", cambiaNombre(atacantes.get(pl)))
+                                .replace("%CASTLE%", plugin.getManager().cambiaNombre(atacantes.get(pl)))
                                 .replace("%PLAYER%", pl.getDisplayName()));
                     }
                     else if (other.getRelationWish(faction) == Rel.NEUTRAL || 
                             other.getRelationWish(faction) == Rel.TRUCE) {
                         faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_NEUTRAL_LEAVE.getText()
-                                .replace("%CASTLE%", cambiaNombre(atacantes.get(pl)))
+                                .replace("%CASTLE%", plugin.getManager().cambiaNombre(atacantes.get(pl)))
                                 .replace("%PLAYER%", pl.getDisplayName()));
                     }
                     else {
                         faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_ENEMY_LEAVE.getText()
-                                .replace("%CASTLE%", cambiaNombre(atacantes.get(pl)))
+                                .replace("%CASTLE%", plugin.getManager().cambiaNombre(atacantes.get(pl)))
                                 .replace("%PLAYER%", pl.getDisplayName()));
                     }                    
                 }  
                 else {
                     faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_SOMEONE_LEAVE.getText()
-                            .replace("%CASTLE%", cambiaNombre(atacantes.get(pl))));
+                            .replace("%CASTLE%", plugin.getManager().cambiaNombre(atacantes.get(pl))));
                 }
                 
                 atacantes.remove(pl, atacantes.get(pl));                
@@ -191,53 +191,32 @@ public class FactionMessageCastle implements Listener, EventExecutor {
         if (vip) {
             if (vip && other == null) {
                     faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_NOFACTION_JOIN.getText()
-                                .replace("%CASTLE%", cambiaNombre(atacantes.get(pl)))
+                                .replace("%CASTLE%", plugin.getManager().cambiaNombre(atacantes.get(pl)))
                                 .replace("%PLAYER%", pl.getDisplayName()));
             }
             else if (other.getRelationWish(faction) == Rel.ALLY) {
                 faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_ALLY_JOIN.getText()
-                        .replace("%CASTLE%", cambiaNombre(tipo))
+                        .replace("%CASTLE%", plugin.getManager().cambiaNombre(tipo))
                         .replace("%PLAYER%", pl.getDisplayName()));
             }
             else if (other.getRelationWish(faction) == Rel.NEUTRAL ||
                     other.getRelationWish(faction) == Rel.TRUCE) {
                 faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_NEUTRAL_JOIN.getText()
-                        .replace("%CASTLE%", cambiaNombre(tipo))
+                        .replace("%CASTLE%", plugin.getManager().cambiaNombre(tipo))
                         .replace("%PLAYER%", pl.getDisplayName()));
             }
             else {
                 faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_ENEMY_JOIN.getText()
-                        .replace("%CASTLE%", cambiaNombre(tipo))
+                        .replace("%CASTLE%", plugin.getManager().cambiaNombre(tipo))
                         .replace("%PLAYER%", pl.getDisplayName()));
             }            
         }
         else {
             faction.sendMessage(EpicCastle.PLUGIN + Lang.CASTLE_SOMEONE_JOIN.getText()
-                    .replace("%CASTLE%", cambiaNombre(tipo)));               
+                    .replace("%CASTLE%", plugin.getManager().cambiaNombre(tipo)));               
         }
 
         atacantes.put(pl, tipo);
-    }
-    
-    /**
-     * Metodo para cambiar el <i>nombre por defecto</i> del castillo por uno mas
-     * <i>agradable</i>
-     * @param c Nombre por defecto
-     * @return Nombre adecuado
-     */
-    public String cambiaNombre(String c) {
-        switch (c) {
-            case "castleXP":
-                return "Castillo XP";
-            case "castleGold":
-                return "Castillo Oro";
-            case "castleDiamond":
-                return "Castillo Diamante";
-            case "castleMoney":
-                return "Castillo Dinero";
-            default:
-                return null;
-        }
     }
 
     public static HashMap<Player, String> getAtacantes() {

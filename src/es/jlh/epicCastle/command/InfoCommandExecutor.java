@@ -6,11 +6,12 @@
 
 package es.jlh.epicCastle.command;
 
-import static es.jlh.epicCastle.event.InventoryClick.POS_DIAMOND;
-import static es.jlh.epicCastle.event.InventoryClick.POS_GOLD;
-import static es.jlh.epicCastle.event.InventoryClick.POS_MONEY;
-import static es.jlh.epicCastle.event.InventoryClick.POS_XP;
+import static es.jlh.epicCastle.handlers.InventoryClick.POS_DIAMOND;
+import static es.jlh.epicCastle.handlers.InventoryClick.POS_GOLD;
+import static es.jlh.epicCastle.handlers.InventoryClick.POS_MONEY;
+import static es.jlh.epicCastle.handlers.InventoryClick.POS_XP;
 import es.jlh.epicCastle.plugin.EpicCastle;
+import static es.jlh.epicCastle.plugin.EpicCastle.PLUGIN;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEDIAMOND;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEGOLD;
 import static es.jlh.epicCastle.plugin.EpicCastleManager.CASTLEMONEY;
@@ -43,12 +44,12 @@ public class InfoCommandExecutor implements CommandExecutor{
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String cmdLabel, String args[]) {                
         if(args.length == 0) {
+            sender.sendMessage(PLUGIN + ChatColor.YELLOW + "v" + plugin.getDescription().getVersion());
             sender.sendMessage("");
             sender.sendMessage(ChatColor.YELLOW + "###################");
             sender.sendMessage(ChatColor.YELLOW + "#" + ChatColor.AQUA +" Lista de comandos " + ChatColor.YELLOW + "#");            
             sender.sendMessage(ChatColor.YELLOW + "###################");           
-            sender.sendMessage("");           
-            sender.sendMessage(ChatColor.AQUA + "/ece creador   ");            
+            sender.sendMessage("");         
             sender.sendMessage(ChatColor.AQUA + "/ece castillos     ");
             
             /* Casos con permiso */
@@ -59,15 +60,11 @@ public class InfoCommandExecutor implements CommandExecutor{
             sender.sendMessage("");
             sender.sendMessage(ChatColor.YELLOW + "###################");
             sender.sendMessage("");
+            sender.sendMessage(EpicCastle.PLUGIN + ChatColor.GOLD + "Creado por Julito");
             return true;
         }
         
         if (args.length >= 1) {            
-            if (args[0].compareToIgnoreCase("creador") == 0) {
-                sender.sendMessage(EpicCastle.PLUGIN + ChatColor.GOLD + "El creador del plugin es JuLiTo");
-                return true;
-            }
-            
             if (args[0].compareToIgnoreCase("info") == 0) {
                 if (!sender.hasPermission("ec.info")) {
                     sender.sendMessage(EpicCastle.PLUGIN + Lang.PLUGIN_NO_PERMISSION.getText());
@@ -110,7 +107,7 @@ public class InfoCommandExecutor implements CommandExecutor{
             
             if (args[0].compareToIgnoreCase("settp") == 0) {                                
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(EpicCastle.PLUGIN + "&cConsola no puedes hacer eso");
+                    sender.sendMessage(EpicCastle.PLUGIN + Lang.PLUGIN_NO_PERMISSION.getText());
                     return true;
                 }
                 
@@ -157,7 +154,7 @@ public class InfoCommandExecutor implements CommandExecutor{
                 }
                 plugin.getManager().onDisable();
                 plugin.getManager().onEnable();
-                sender.sendMessage(EpicCastle.PLUGIN + ChatColor.GREEN + "Plugin recargado correctamente");
+                sender.sendMessage(EpicCastle.PLUGIN + Lang.PLUGIN_RELOAD.getText());
                 return true;
             }            
         }        
