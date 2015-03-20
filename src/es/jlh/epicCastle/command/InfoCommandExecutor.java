@@ -53,13 +53,21 @@ public class InfoCommandExecutor implements CommandExecutor{
             sender.sendMessage(ChatColor.AQUA + "/ece castillos     ");
             
             /* Casos con permiso */
-            if (sender.hasPermission("ec.info")) {sender.sendMessage(ChatColor.AQUA + "/ece info     ");}
-            if (sender.hasPermission("ec.settp")) {sender.sendMessage(ChatColor.AQUA + "/ece settp <xp|money|gold|diamond>     ");}
-            if (sender.hasPermission("ec.reload")) {sender.sendMessage(ChatColor.AQUA + "/ece reload     ");}
+            if (sender.hasPermission("ec.info")) {
+                sender.sendMessage(ChatColor.AQUA + "/ece info     ");
+            }
             
-            sender.sendMessage("");
-            sender.sendMessage(ChatColor.YELLOW + "###################");
-            sender.sendMessage("");
+            if (sender.hasPermission("ec.settp")) {
+                sender.sendMessage(ChatColor.AQUA + "/ece settp <xp|money|gold|diamond>     ");
+            }
+            
+            if (sender.hasPermission("ec.reload")) {
+                sender.sendMessage(ChatColor.AQUA + "/ece reload     ");
+            }
+            
+            sender.sendMessage("");            
+            sender.sendMessage(ChatColor.YELLOW + "###################");            
+            sender.sendMessage("");            
             sender.sendMessage(EpicCastle.PLUGIN + ChatColor.GOLD + "Creado por Julito");
             return true;
         }

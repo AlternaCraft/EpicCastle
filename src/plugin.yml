@@ -59,10 +59,10 @@ permissions:
     # Permisos incluidos en el evento PlayerCastle
     ec.settp:
         description: Establecer teleport de castillo
-        default: false
+        default: op
     ec.info:
         description: Como crear las zonas
-        default: false
+        default: op
     ec.reload:
         description: Recargar el plugin
-        default: false
+        default: op
