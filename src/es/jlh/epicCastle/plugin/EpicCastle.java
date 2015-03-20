@@ -9,7 +9,6 @@ import es.jlh.epicCastle.handlers.InventoryClick;
 import es.jlh.epicCastle.handlers.PlayerMessageCastle;
 import es.jlh.epicCastle.handlers.FactionMessageCastle;
 import es.jlh.epicCastle.handlers.PlayerSign;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
@@ -29,36 +28,12 @@ public class EpicCastle extends JavaPlugin {
     private static Logger log;    
     private EpicCastleManager manager = null;    
     private Economy economy;
-    
-    private boolean invalidBukkit = false;
-    
-    private void checkBukkitVersion() {
-        try {
-            Class.forName("net.minecraft.server.v1_7_R3.Packet");
-            this.invalidBukkit = false;
-        } 
-        catch (ClassNotFoundException e) {
-            this.invalidBukkit = true;
-        }
-    }
-    
+
     @Override
-    public void onLoad() {
+    public void onEnable() {
         log = this.getLogger();
         manager = new EpicCastleManager(this);
         
-        this.checkBukkitVersion();       
-
-        if (this.invalidBukkit) {
-            log.severe("Tu version no es soportada!");
-            log.severe("Este plugin funciona con la version 1.7.X!");
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
-        }        
-    }
-    
-    @Override
-    public void onEnable() {
         if (!this.setupEconomy() || !this.setupFactions() || !this.setupWorldGuard()) {
             this.getServer().getConsoleSender().sendMessage(PLUGIN + 
                     ChatColor.RED + ChatColor.BOLD + "Se va a desactivar el plugin");
@@ -111,7 +86,7 @@ public class EpicCastle extends JavaPlugin {
         }
         else {
             Bukkit.getServer().getConsoleSender().sendMessage(EpicCastle.PLUGIN + 
-                    ChatColor.RED + "Es necesario un plugin de economia");
+                    ChatColor.RED + "Es necesario un plugin de economia (Ej: Essentials)");
             return false;
         }
         
