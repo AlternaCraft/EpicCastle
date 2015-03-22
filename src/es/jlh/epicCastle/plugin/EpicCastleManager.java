@@ -81,7 +81,7 @@ public class EpicCastleManager {
         plugin = pl;
     }
 
-    public void onEnable() {
+    public void onEnable() {        
         //Cargar el config
         plugin.reloadConfig();
         

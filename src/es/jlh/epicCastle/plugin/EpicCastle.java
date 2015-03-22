@@ -9,6 +9,8 @@ import es.jlh.epicCastle.handlers.InventoryClick;
 import es.jlh.epicCastle.handlers.PlayerMessageCastle;
 import es.jlh.epicCastle.handlers.FactionMessageCastle;
 import es.jlh.epicCastle.handlers.PlayerSign;
+import es.jlh.epicCastle.utils.Metrics;
+import java.io.IOException;
 import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
@@ -56,6 +58,16 @@ public class EpicCastle extends JavaPlugin {
         catch (Exception ex) {
             this.getServer().getConsoleSender().sendMessage(PLUGIN + 
                         ChatColor.RED + ex.getMessage());
+        }
+        
+        // Metricas del plugin
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } 
+        catch (IOException e) {
+            this.getServer().getConsoleSender().sendMessage(PLUGIN + 
+                        ChatColor.RED + "Failed to submit the stats :-("); 
         }
         
         manager.onEnable();        
